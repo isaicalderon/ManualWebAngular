@@ -1,20 +1,48 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<nav class="navbar navbar-dark" style="background: rgba(0,0,0,0.8);padding: 0 1rem;">
+  <a class="navbar-brand" href="#">
+      <img style="float:left;margin-right: 10px;" src="matcocat.png" width="60%"  class="d-inline-block align-top" alt="">
+  </a>
+  <div style="float:right">
+      <p style="margin-top:10px;color: #FFCC00 !important;font-size: 25px;">
+          Capacitación
+      </p>
+  </div>
+</nav>
 
+<div class="container-fluid pd-07">
+
+    <p-breadcrumb [model]="menuNav"></p-breadcrumb>
+    <p class='mb-10'></p> <!-- dejamos espacio con margin-bottom --> 
+    <p-menubar [model]="menuBar"></p-menubar>
+    <p class="mb-10"></p>
+    <p-table id="table" #dt [columns]="cols" [value]="alumnos" [paginator]="true" [rows] = "10"
+        selectionMode="single" [(selection)] = "dataSelect" (onRowSelect)="onRowSelect()" (onRowUnselect)="onRowUnselect($event)">
+        <ng-template pTemplate="caption">
+            <div style="text-align: left">
+                <button class="btn btn-dark" (click)="clearFilters(dt)">
+                <i class="pi pi-trash" style="margin:0px 0px"></i> Borrar Filtros</button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                    </th>
+                </tr>
+                <tr>
+                    <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">     
+                    </th>
+                </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-alumno>
+                <tr [pSelectableRow]="rowData">
+                    <td>{{alumno.matricula}}</td>
+                    <td>{{alumno.nombres}}</td>
+                    <td>{{alumno.apellidoPaterno}}</td>
+                    <td>{{alumno.apellidoMaterno}}</td>
+                </tr>
+        </ng-template>
+    </p-table>
+</div>

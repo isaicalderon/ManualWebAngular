@@ -20,7 +20,8 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/matcocat.png",
+              "src/assets"  
             ],
             "styles": [
               "node_modules/primeicons/primeicons.css",
