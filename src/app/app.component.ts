@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AlumnoService } from './services/alumno.services';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,15 @@ import { MenuItem } from 'primeng/api';
 export class AppComponent implements OnInit{
   
   menuNav:MenuItem[]; // p-breadcrumb
-
   menuBar:MenuItem[]; // p-menubar
-
   cols:any[];
+  alumnos: AlumnoService[];
+
+  constructor(private alumnoService: AlumnoService) {}
 
   ngOnInit(){
+    
+    this.alumnoService.getAllAlumnos().then(alumnos => this.alumnos = alumnos);
 
     this.cols = [
       { field: 'matricula', header: 'Matricula' },

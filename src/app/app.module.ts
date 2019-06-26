@@ -5,11 +5,12 @@ import {MenuItem} from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-
+import { HttpClientModule } from '@angular/common/http'; 
 // componentes
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {MenubarModule} from 'primeng/menubar';
 import {TableModule} from 'primeng/table';
+import { AlumnoService } from './services/alumno.services';
 
 @NgModule({
   declarations: [
@@ -22,11 +23,14 @@ import {TableModule} from 'primeng/table';
     FormsModule,
     BreadcrumbModule,
     MenubarModule,
-    TableModule
+    TableModule,
+    HttpClientModule
     //MenuItem
   ],
 
-  providers: [],
+  providers: [
+    AlumnoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
