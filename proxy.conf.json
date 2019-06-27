@@ -1,6 +1,6 @@
     {   
         "/ServiciosAlumno/servicios/*": {
-        "target": "http://localhost:8085",
+        "target": "http://192.168.100.11:8085",
         "secure": false,
         "changeOrigin":true
         }

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 export class AlumnoService{
     constructor(private http: HttpClient){}
 
-    obtenerTodos = "/ServiciosAlumno/servicios/alumnoServicio/obtenerTodosAlumnos?";
+    obtenerTodos = "/ServiciosAlumno/servicios/alumnoServicio/obtenerTodosAlumnos";
     
     getAllAlumnos(){
         return this.http.get(this.obtenerTodos)

@@ -11,6 +11,7 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {MenubarModule} from 'primeng/menubar';
 import {TableModule} from 'primeng/table';
 import { AlumnoService } from './services/alumno.services';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AlumnoService } from './services/alumno.services';
     BreadcrumbModule,
     MenubarModule,
     TableModule,
-    HttpClientModule
+    HttpClientModule,
+    DialogModule
     //MenuItem
   ],
 

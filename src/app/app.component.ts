@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AlumnoService } from './services/alumno.services';
+import { Alumno } from './entity/alumnos.entity';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,19 @@ import { AlumnoService } from './services/alumno.services';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+
+  constructor(private alumnoService: AlumnoService) {}
   
   menuNav:MenuItem[]; // p-breadcrumb
   menuBar:MenuItem[]; // p-menubar
   cols:any[];
-  alumnos: AlumnoService[];
+  alumnos:Alumno[];
 
-  constructor(private alumnoService: AlumnoService) {}
+  displayAgregar: boolean = false;
+
+  showDialogAgregar(){
+    this.displayAgregar = !this.displayAgregar;
+  }
 
   ngOnInit(){
     
@@ -33,7 +40,10 @@ export class AppComponent implements OnInit{
           items: [
             {
               label: 'Agregar', 
-              icon: 'pi pi-fw pi-plus'
+              icon: 'pi pi-fw pi-plus',
+              command: (onclick) => {
+                this.showDialogAgregar();
+              }
             },
             {
               label: 'Editar', 
