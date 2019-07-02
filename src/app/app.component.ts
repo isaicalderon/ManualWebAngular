@@ -17,10 +17,27 @@ export class AppComponent implements OnInit{
   cols:any[];
   alumnos:Alumno[];
 
+  alumnoSend: Alumno = {
+    nombres:"",
+    apellidoPaterno:"",
+    apellidoMaterno:"",
+    creadoPor:"user",
+    modificadoPor:""
+  }
+
   displayAgregar: boolean = false;
 
   showDialogAgregar(){
     this.displayAgregar = !this.displayAgregar;
+  }
+
+  funAgregarAlumno(){
+    this.alumnoService.guardarAlumno(this.alumnoSend)
+      .subscribe(data => {
+        this.showDialogAgregar(); // cerramos el dialog
+        this.showMessage('Se ha agregado correctamente el alumno '+(data as Alumno).matricula+' - '
+          +(data as Alumno).nombres+" "+(data as Alumno).apellidoPaterno+" "+(data as Alumno).apellidoMaterno);
+    });  
   }
 
   ngOnInit(){

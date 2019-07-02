@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Alumno } from '../entity/alumnos.entity';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+const header = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 @Injectable({providedIn: 'root'})
 export class AlumnoService{
     constructor(private http: HttpClient){}
 
     obtenerTodos = "/ServiciosAlumno/servicios/alumnoServicio/obtenerTodosAlumnos";
-    
+    urlGuardarAlumno = "/ServiciosAlumnos/servicios/alumnoServicio/guardarAlumno";
+   /*
+    guardarAlumno(alumno:Alumno){
+        return this.http.post(this.urlGuardarAlumno, alumno, header)
+    }
+     */
     getAllAlumnos(){
         return this.http.get(this.obtenerTodos)
             .toPromise()
