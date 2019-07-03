@@ -10,8 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {MenubarModule} from 'primeng/menubar';
 import {TableModule} from 'primeng/table';
-import { AlumnoService } from './services/alumno.services';
+import {AlumnoService} from './services/alumno.services';
 import {DialogModule} from 'primeng/dialog';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {DialogModule} from 'primeng/dialog';
     MenubarModule,
     TableModule,
     HttpClientModule,
-    DialogModule
+    DialogModule,
+    ToastModule
     //MenuItem
   ],
 

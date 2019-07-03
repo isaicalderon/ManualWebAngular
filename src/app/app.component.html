@@ -9,6 +9,8 @@
   </div>
 </nav>
 
+<p-toast key="msgToast" [modal]="true" [baseZIndex]="5000"></p-toast>
+
 <div class="container-fluid pd-07">
     <p-breadcrumb [model]="menuNav"></p-breadcrumb>
     <p class='mb-10'></p> <!-- dejamos espacio con margin-bottom --> 
@@ -16,40 +18,92 @@
     <p class="mb-10"></p>
 
     <p-dialog id="altaAlumno" header="Alta Alumno" [(visible)]="displayAgregar" [modal]="true" [responsive]="true"
-    [style]="{width: '450px', height: '230px', background: '#3f3f3f', top: '0px'}" [minY]="50">
-    <div style="padding: 1%;">
-        <form>
-            <div class="form-group row" style="margin-bottom:10px;">
-                <label for="nombres" class="col-sm-4 col-form-label">Nombre: </label>
-                <div class="col-sm-8">
-                    <input [(ngModel)]="alumnoSend.nombres" id="nombres" type="text" class="input-dialog" name="nombres">
+        [style]="{width: '450px', height: '230px', background: '#3f3f3f', top: '0px'}" [minY]="50">
+        <div style="padding: 1%;">
+            <form>
+                <div class="form-group row" style="margin-bottom:10px;">
+                    <label for="nombres" class="col-sm-4 col-form-label">Nombre: </label>
+                    <div class="col-sm-8">
+                        <input [(ngModel)]="alumnoSend.nombres" id="nombres" type="text" class="input-dialog" name="nombres">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row" style="margin-bottom:10px;">
-                <label for="app" class="col-sm-4 col-form-label">Apellido Paterno:</label>
-                <div class="col-sm-8">
-                    <input [(ngModel)]="alumnoSend.apellidoPaterno"  type="text" class="input-dialog" id="app" placeholder="" name='apellidoPaterno'>
+                <div class="form-group row" style="margin-bottom:10px;">
+                    <label for="app" class="col-sm-4 col-form-label">Apellido Paterno:</label>
+                    <div class="col-sm-8">
+                        <input [(ngModel)]="alumnoSend.apellidoPaterno"  type="text" class="input-dialog" id="app" placeholder="" name='apellidoPaterno'>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row" style="margin-bottom:20px;">
-                <label for="apm" class="col-sm-4 col-form-label">Apellido Materno:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="input-dialog" id="apm" placeholder="">
+                <div class="form-group row" style="margin-bottom:20px;">
+                    <label for="apm" class="col-sm-4 col-form-label">Apellido Materno:</label>
+                    <div class="col-sm-8">
+                        <input [(ngModel)]="alumnoSend.apellidoMaterno" type="text" class="input-dialog" id="apm" placeholder="" name='apellidoMaterno'>
+                    </div>
                 </div>
-            </div>
-            <p style="text-align: center">
-                <button id="btnAgregar" class="btn btn-dark" (click)="funAgregarAlumno()">
-                        <span id="spanSpinner" class="spinner-border spinner-border-sm dp-none" role="status" aria-hidden="true"></span>
-                        <span id="spanText">Registrar</span>
-                </button>
-                <button class="btn btn-dark" (click) = "showDialogAgregar()">Cancelar</button>
+                <p style="text-align: center">
+                    <button id="btnAgregar" class="btn btn-dark" (click)="funAgregarAlumno()">
+                            <span id="spanSpinner" class="spinner-border spinner-border-sm dp-none" role="status" aria-hidden="true"></span>
+                            <span id="spanText">Registrar</span>
+                    </button>
+                    <button class="btn btn-dark" (click) = "showDialogAgregar()">Cancelar</button>
+                </p>
+            </form>
+        </div>
+    </p-dialog>
+
+    <p-dialog id="editarAlumno" header="Editar Alumno" [(visible)]="displayEditar" [modal]="true" [responsive]="true"
+        [style]="{width: '450px', height: '230px', background: '#3f3f3f', top: '0px'}" [minY]="50">
+        <div style="padding: 5%;">
+            <form>
+                <div class="form-group row" style="margin-bottom:10px;">
+                    <label for="matricula" class="col-sm-6 col-form-label">Matricula: </label>
+                    <div class="col-sm-6">
+                        <input [(ngModel)]="alumnoSend.matricula" id="matricula" type="text" class="input-dialog" name="matricula">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:10px;">
+                    <label for="nombres" class="col-sm-6 col-form-label">Nombre: </label>
+                    <div class="col-sm-6">
+                        <input [(ngModel)]="alumnoSend.nombres" id="nombres" type="text" class="input-dialog" name="nombres">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:10px;">
+                    <label for="app" class="col-sm-6 col-form-label">Apellido Paterno:</label>
+                    <div class="col-sm-6">
+                        <input [(ngModel)]="alumnoSend.apellidoPaterno"  type="text" class="input-dialog" id="app" placeholder="" name='apellidoPaterno'>
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:20px;">
+                    <label for="apm" class="col-sm-6 col-form-label">Apellido Materno:</label>
+                    <div class="col-sm-6">
+                        <input [(ngModel)]="alumnoSend.apellidoMaterno" type="text" class="input-dialog" id="apm" placeholder="" name='apellidoMaterno'>
+                    </div>
+                </div>
+                <p style="text-align: center">
+                    <button id="btnAgregar" class="btn btn-dark" (click)="funEditarAlumno()">
+                            <span id="spanSpinner" class="spinner-border spinner-border-sm dp-none" role="status" aria-hidden="true"></span>
+                            <span id="spanText">Editar</span>
+                    </button>
+                    <button class="btn btn-dark" (click) = "showDialogEditar()">Cancelar</button>
+                </p>
+            </form>
+        </div>
+    </p-dialog>
+
+    <p-dialog id="eliminarAlumno" header="Confirmacion" [(visible)]="displayConfirm" [modal]="true" [responsive]="true"
+        [style]="{width: '450px', height: '200px', background: '#3f3f3f', top: '0px'}" [minY]="50">
+        <div style="padding: 5% 2%;">
+            <p>
+                <span class="pi pi-trash"></span> ¿Estas seguro que deseas borrar al alumno con la matricula: {{alumnoSend.matricula}} ?
             </p>
-        </form>
-    </div>
-</p-dialog> 
+            <p style="text-align: right;margin-top: 13px;">
+                <button class="btn btn-dark" (click) = "funEliminarAlumno()">Si</button>
+                <button class="btn btn-dark" (click) = "showDialogDeleteConfirm();clearFilters(dt)">No</button>
+            </p>  
+        </div>
+    </p-dialog>
 
     <p-table id="table" #dt [columns]="cols" [value]="alumnos" [paginator]="true" [rows] = "10"
-        selectionMode="single" [(selection)] = "dataSelect" (onRowSelect)="onRowSelect()" (onRowUnselect)="onRowUnselect($event)">
+        selectionMode="single" [(selection)] = "alumnoSelect" (onRowSelect)="onRowSelect()" (onRowUnselect)="onRowUnselect($event)">
         <ng-template pTemplate="caption">
             <div style="text-align: left">
                 <button class="btn btn-dark" (click)="clearFilters(dt)">
