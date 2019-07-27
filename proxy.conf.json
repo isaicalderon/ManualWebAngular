@@ -1,6 +1,6 @@
     {   
         "/ServiciosAlumno/servicios/*": {
-        "target": "http://localhost:8085",
+        "target": "http://ec2-13-58-25-192.us-east-2.compute.amazonaws.com:8081",
         "secure": false,
         "changeOrigin":true
         }
